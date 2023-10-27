@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import { AiOutlineArrowRight } from 'react-icons/ai';
+// import { AiOutlineArrowRight } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const ServiceCart = ({ service }) => {
-    const { title, price, img } = service;
+    const { title, price, img, _id } = service;
     return (
         <div>
             <div className="card w-96 h-full bg-base-100 shadow-xl">
@@ -13,7 +14,10 @@ const ServiceCart = ({ service }) => {
                     <h2 className="card-title">{title}</h2>
                     <div className="card-actions justify-between items-center w-full">
                         <h3>Price: ${price}</h3>
-                        <button className='btn btn-circle btn-ghost'><AiOutlineArrowRight/></button>
+                        {/* <button className='btn btn-circle btn-ghost'><AiOutlineArrowRight/></button> */}
+                        <Link to={`/checkout/${_id}`}>
+                        <button className='btn btn-error'>Book Now</button>
+                        </Link>
                     </div>
                 </div>
             </div>
