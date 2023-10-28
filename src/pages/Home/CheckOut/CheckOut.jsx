@@ -14,7 +14,7 @@ const CheckOut = () => {
         const name = form.name.value;
         const date = form.date.value;
         const email = user?.email;
-        const booking={
+        axios.post('http://localhost:5000/bookings',{
             customerName: name,
             email,
             service: title,
@@ -22,8 +22,7 @@ const CheckOut = () => {
             img,
             date,
             Price: price
-        }
-        axios.post('http://localhost:5000/bookings',{booking})
+        })
         .then(data=>{
             console.log(data.data);
             if (data.data.insertedId) {

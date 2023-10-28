@@ -1,15 +1,32 @@
 import { Link, NavLink } from "react-router-dom";
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import logo from '../../../assets/logo.svg';
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProviders";
 
 const Navbar = () => {
+    const {user, logOut} = useContext(AuthContext);
+    const handleLogOut = ()=>{
+        logOut()
+        .then(result=>console.log(result.user))
+        .catch(error=>console.log(error.message))
+    }
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/about">About</NavLink></li>
         <li><NavLink to="/services">Services</NavLink></li>
         <li><NavLink to="/blog">Blog</NavLink></li>
-        <li><NavLink to="/contact">Contact</NavLink></li>
+        {
+            user?.email ? 
+           <>
+            <li><NavLink to="/bookings">My Bookings</NavLink></li>
+            <li><button onClick={handleLogOut}>LogOut</button></li>
+           </>
+           :
+            <li><NavLink to="/login">Login</NavLink></li>
+        }
+
     </>
 
     return (
